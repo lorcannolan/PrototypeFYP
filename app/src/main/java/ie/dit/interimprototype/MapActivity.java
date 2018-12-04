@@ -71,7 +71,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         LatLng latlng = new LatLng(address.getLatitude(), address.getLongitude());
                         Log.d(TAG, address.toString());
 
-                        myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, 10f));
+                        myMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latlng, 15f));
 
                         MarkerOptions courseLoc = new MarkerOptions()
                                 .position(latlng)
@@ -87,6 +87,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         myMap = googleMap;
+        myMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
     }
 
     private void initMap() {
