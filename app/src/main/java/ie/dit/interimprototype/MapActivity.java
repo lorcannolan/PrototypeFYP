@@ -54,7 +54,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         courseSearch = (EditText) findViewById(R.id.searchText);
         save = (FloatingActionButton) findViewById(R.id.save);
 
-        initMap();
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+
+        mapFragment.getMapAsync(MapActivity.this);
 
         // Catch enter/search button entered
         courseSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -97,9 +99,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-
                 String id = courseRef.push().getKey();
                 courseRef.child(id).child("name").setValue(courseSearch.getText().toString());
                 courseRef.child(id).child("Address").setValue(address.getAddressLine(0));
@@ -112,11 +111,5 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         myMap = googleMap;
         myMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-    }
-
-    private void initMap() {
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-
-        mapFragment.getMapAsync(MapActivity.this);
     }
 }
